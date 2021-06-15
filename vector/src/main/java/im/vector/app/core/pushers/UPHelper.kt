@@ -142,6 +142,7 @@ object UPHelper {
              * if GET custom returns """{"unifiedpush":{"gateway":"matrix"}}"""
              * return custom
              */
+            return custom
         }
         return default
     }
