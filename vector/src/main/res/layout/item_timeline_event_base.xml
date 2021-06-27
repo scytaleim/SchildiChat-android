@@ -27,6 +27,7 @@
 
     <TextView
         android:id="@+id/messageMemberNameView"
+        style="@style/Widget.Vector.TextView.Subtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -37,21 +38,20 @@
         android:layout_toEndOf="@+id/messageStartGuideline"
         android:ellipsize="end"
         android:maxLines="1"
-        android:textColor="?riotx_text_primary"
-        android:textSize="15sp"
+        android:textColor="?vctr_content_primary"
         android:textStyle="bold"
         tools:text="@sample/users.json/data/displayName" />
 
     <TextView
         android:id="@+id/messageTimeView"
+        style="@style/Widget.Vector.TextView.Caption"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/messageMemberNameView"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:textColor="?riotx_text_secondary"
-        android:textSize="12sp"
+        android:textColor="?vctr_content_secondary"
         tools:text="@tools:sample/date/hhmm" />
 
     <View
@@ -110,7 +110,7 @@
                 android:layout_toStartOf="@id/bubbleMessageTimeView"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:textColor="?riotx_text_primary"
+                android:textColor="?vctr_content_primary"
                 android:textSize="15sp"
                 android:textStyle="bold"
                 tools:text="@sample/matrix.json/data/displayName" />
@@ -123,7 +123,7 @@
                 android:layout_alignEnd="@id/viewStubContainer"
                 android:layout_marginBottom="4dp"
                 android:maxLines="1"
-                android:textColor="?riotx_text_secondary"
+                android:textColor="?vctr_content_secondary"
                 android:textSize="12sp"
                 tools:text="@tools:sample/date/hhmm" />
 
@@ -198,7 +198,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="0dp"
                 android:maxLines="1"
-                android:textColor="?riotx_text_secondary"
+                android:textColor="?vctr_content_secondary"
                 android:textSize="12sp"
                 tools:text="@tools:sample/date/hhmm" />
                 -->
@@ -222,7 +222,7 @@
                     android:paddingStart="4dp"
                     android:paddingEnd="0dp"
                     android:maxLines="1"
-                    tools:textColor="?riotx_text_secondary"
+                    tools:textColor="?vctr_content_secondary"
                     android:textSize="12sp"
                     android:layout_gravity="bottom"
                     tools:text="@tools:sample/date/hhmm" />
@@ -236,7 +236,7 @@
                     android:paddingStart="4dp"
                     android:paddingEnd="0dp"
                     android:layout_gravity="bottom"
-                    tools:tint="?riotx_text_secondary"
+                    tools:tint="?vctr_content_secondary"
                     tools:src="@drawable/ic_processing_msg"
                     android:contentDescription="@string/footer_read_receipt_content_description" />
             </LinearLayout>
@@ -256,7 +256,7 @@
         android:contentDescription="@string/event_status_a11y_sending"
         android:src="@drawable/ic_sending_message"
         android:visibility="gone"
-        tools:tint="?riotx_text_tertiary"
+        tools:tint="?vctr_content_tertiary"
         tools:visibility="visible" />
 
     <ProgressBar
@@ -268,9 +268,10 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="4dp"
-        android:indeterminateTint="?riotx_text_secondary"
-        android:tint="?riotx_text_tertiary"
+        android:indeterminateTint="?vctr_content_secondary"
         android:visibility="gone"
+        app:tint="?vctr_content_tertiary"
+        tools:ignore="MissingPrefix"
         tools:visibility="visible" />
 
     <LinearLayout

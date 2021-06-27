@@ -17,6 +17,7 @@
 package im.vector.app.features.home.room.detail.composer
 
 import android.content.Context
+import android.content.res.ColorStateList
 import android.net.Uri
 import android.text.Editable
 import android.util.AttributeSet
@@ -24,6 +25,8 @@ import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.text.toSpannable
+import androidx.core.view.isVisible
+import androidx.transition.AutoTransition
 import androidx.transition.ChangeBounds
 import androidx.transition.Fade
 import androidx.transition.Transition
@@ -31,12 +34,10 @@ import androidx.transition.TransitionManager
 import androidx.transition.TransitionSet
 import im.vector.app.R
 import im.vector.app.databinding.ComposerLayoutBinding
-
-import org.matrix.android.sdk.api.crypto.RoomEncryptionTrustLevel
+import im.vector.app.features.themes.ThemeUtils
 
 /**
  * Encapsulate the timeline composer UX.
- *
  */
 class TextComposerView @JvmOverloads constructor(
         context: Context,
@@ -70,6 +71,22 @@ class TextComposerView @JvmOverloads constructor(
             override fun onRichContentSelected(contentUri: Uri): Boolean {
                 return callback?.onRichContentSelected(contentUri) ?: false
             }
+
+            override fun onTextBlankStateChanged(isBlank: Boolean) {
+                callback?.onTextBlankStateChanged(isBlank)
+                /*
+                val shouldBeVisible = currentConstraintSetId == R.layout.composer_layout_constraint_set_expanded || !isBlank
+                TransitionManager.endTransitions(this@TextComposerView)
+                if (views.sendButton.isVisible != shouldBeVisible) {
+                    TransitionManager.beginDelayedTransition(
+                            this@TextComposerView,
+                            AutoTransition().also { it.duration = 150 }
+                    )
+                    views.sendButton.isVisible = shouldBeVisible
+                }
+                 */
+                updateSendButtonColor(isBlank)
+            }
         }
         views.composerRelatedMessageCloseButton.setOnClickListener {
             collapse()
@@ -86,6 +103,11 @@ class TextComposerView @JvmOverloads constructor(
         }
     }
 
+    private fun updateSendButtonColor(isBlank: Boolean) {
+        val color = ThemeUtils.getColor(views.sendButton.context, if (isBlank) R.attr.vctr_content_tertiary else R.attr.colorAccent)
+        views.sendButton.imageTintList = ColorStateList.valueOf(color)
+    }
+
     fun collapse(animate: Boolean = true, transitionComplete: (() -> Unit)? = null) {
         if (currentConstraintSetId == R.layout.composer_layout_constraint_set_compact) {
             // ignore we good
@@ -93,6 +115,7 @@ class TextComposerView @JvmOverloads constructor(
         }
         currentConstraintSetId = R.layout.composer_layout_constraint_set_compact
         applyNewConstraintSet(animate, transitionComplete)
+        //views.sendButton.isVisible = !views.composerEditText.text.isNullOrEmpty()
     }
 
     fun expand(animate: Boolean = true, transitionComplete: (() -> Unit)? = null) {
@@ -102,6 +125,7 @@ class TextComposerView @JvmOverloads constructor(
         }
         currentConstraintSetId = R.layout.composer_layout_constraint_set_expanded
         applyNewConstraintSet(animate, transitionComplete)
+        //views.sendButton.isVisible = true
     }
 
     private fun applyNewConstraintSet(animate: Boolean, transitionComplete: (() -> Unit)?) {
@@ -110,8 +134,6 @@ class TextComposerView @JvmOverloads constructor(
         }
         ConstraintSet().also {
             it.clone(context, currentConstraintSetId)
-            // in case shield is hidden, we will have glitch without this
-            it.getConstraint(R.id.composerShieldImageView).propertySet.visibility = views.composerShieldImageView.visibility
             it.getConstraint(R.id.composerEmojiButton).propertySet.visibility = views.composerEmojiButton.visibility
             it.applyTo(this)
         }
@@ -140,13 +162,11 @@ class TextComposerView @JvmOverloads constructor(
         TransitionManager.beginDelayedTransition((parent as? ViewGroup ?: this), transition)
     }
 
-    fun setRoomEncrypted(isEncrypted: Boolean, roomEncryptionTrustLevel: RoomEncryptionTrustLevel?) {
+    fun setRoomEncrypted(isEncrypted: Boolean) {
         if (isEncrypted) {
             views.composerEditText.setHint(R.string.room_message_placeholder)
-            views.composerShieldImageView.render(roomEncryptionTrustLevel)
         } else {
             views.composerEditText.setHint(R.string.room_message_placeholder)
-            views.composerShieldImageView.render(null)
         }
     }
 }

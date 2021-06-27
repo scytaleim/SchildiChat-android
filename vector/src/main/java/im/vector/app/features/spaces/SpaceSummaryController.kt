@@ -16,14 +16,13 @@
 
 package im.vector.app.features.spaces
 
-import android.view.View
 import com.airbnb.epoxy.EpoxyController
 import im.vector.app.R
 import im.vector.app.RoomGroupingMethod
 import im.vector.app.core.resources.ColorProvider
 import im.vector.app.core.resources.StringProvider
 import im.vector.app.core.ui.list.genericFooterItem
-import im.vector.app.core.ui.list.genericItemHeader
+import im.vector.app.core.ui.list.genericHeaderItem
 import im.vector.app.features.grouplist.groupSummaryItem
 import im.vector.app.features.grouplist.homeSpaceSummaryItem
 import im.vector.app.features.home.AvatarRenderer
@@ -66,7 +65,7 @@ class SpaceSummaryController @Inject constructor(
         buildGroupModels(
                 nonNullViewState.asyncSpaces(),
                 nonNullViewState.selectedGroupingMethod,
-                nonNullViewState.rootSpaces,
+                nonNullViewState.rootSpacesOrdered,
                 nonNullViewState.expandedStates,
                 nonNullViewState.homeAggregateCount)
 
@@ -76,10 +75,10 @@ class SpaceSummaryController @Inject constructor(
                 text(" ")
             }
 
-            genericItemHeader {
+            genericHeaderItem {
                 id("legacy_groups")
                 text(host.stringProvider.getString(R.string.groups_header))
-                textColor(host.colorProvider.getColorFromAttribute(R.attr.riotx_text_primary))
+                textColor(host.colorProvider.getColorFromAttribute(R.attr.vctr_content_primary))
             }
 
             // add home for communities
@@ -115,23 +114,24 @@ class SpaceSummaryController @Inject constructor(
         val host = this
         spaceBetaHeaderItem {
             id("beta_header")
-            clickAction(View.OnClickListener {
+            clickAction {
                 host.callback?.sendFeedBack()
-            })
+            }
         }
 
         // show invites on top
 
         summaries?.filter { it.membership == Membership.INVITE }
-                ?.forEach {
+                ?.forEach { roomSummary ->
                     spaceSummaryItem {
                         avatarRenderer(host.avatarRenderer)
-                        id(it.roomId)
-                        matrixItem(it.toMatrixItem())
+                        id(roomSummary.roomId)
+                        matrixItem(roomSummary.toMatrixItem())
                         countState(UnreadCounterBadgeView.State(1, true, 0, false))
                         selected(false)
                         description(host.stringProvider.getString(R.string.you_are_invited))
-                        listener { host.callback?.onSpaceInviteSelected(it) }
+                        canDrag(false)
+                        listener { host.callback?.onSpaceInviteSelected(roomSummary) }
                     }
                 }
 
@@ -143,7 +143,6 @@ class SpaceSummaryController @Inject constructor(
         }
 
         rootSpaces
-                ?.sortedBy { it.displayName.lowercase(Locale.getDefault()) }
                 ?.forEach { groupSummary ->
                     val isSelected = selected is RoomGroupingMethod.BySpace && groupSummary.roomId == selected.space()?.roomId
                     // does it have children?
@@ -158,8 +157,12 @@ class SpaceSummaryController @Inject constructor(
                         id(groupSummary.roomId)
                         hasChildren(hasChildren)
                         expanded(expanded)
+                        // to debug order
+                        // matrixItem(groupSummary.copy(displayName = "${groupSummary.displayName} / ${spaceOrderInfo?.get(groupSummary.roomId)}")
+                        // .toMatrixItem())
                         matrixItem(groupSummary.toMatrixItem())
                         selected(isSelected)
+                        canDrag(true)
                         onMore { host.callback?.onSpaceSettings(groupSummary) }
                         listener { host.callback?.onSpaceSelected(groupSummary) }
                         toggleExpand { host.callback?.onToggleExpand(groupSummary) }

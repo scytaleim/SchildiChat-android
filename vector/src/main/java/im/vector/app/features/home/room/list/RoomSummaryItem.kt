@@ -21,19 +21,21 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.content.ContextCompat
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import com.airbnb.epoxy.EpoxyAttribute
 import com.airbnb.epoxy.EpoxyModelClass
 import com.amulyakhare.textdrawable.TextDrawable
 import im.vector.app.R
+import im.vector.app.core.epoxy.ClickListener
 import im.vector.app.core.epoxy.VectorEpoxyHolder
 import im.vector.app.core.epoxy.VectorEpoxyModel
+import im.vector.app.core.epoxy.onClick
 import im.vector.app.core.extensions.setTextOrHide
 import im.vector.app.core.resources.ColorProvider
 import im.vector.app.core.ui.views.ShieldImageView
 import im.vector.app.features.home.AvatarRenderer
+import im.vector.app.features.themes.ThemeUtils
 import org.matrix.android.sdk.api.crypto.RoomEncryptionTrustLevel
 import org.matrix.android.sdk.api.util.MatrixItem
 
@@ -59,12 +61,12 @@ abstract class RoomSummaryItem : VectorEpoxyModel<RoomSummaryItem.Holder>() {
     @EpoxyAttribute var showHighlighted: Boolean = false
     @EpoxyAttribute var hasFailedSending: Boolean = false
     @EpoxyAttribute(EpoxyAttribute.Option.DoNotHash) var itemLongClickListener: View.OnLongClickListener? = null
-    @EpoxyAttribute(EpoxyAttribute.Option.DoNotHash) var itemClickListener: View.OnClickListener? = null
+    @EpoxyAttribute(EpoxyAttribute.Option.DoNotHash) var itemClickListener: ClickListener? = null
     @EpoxyAttribute var showSelected: Boolean = false
 
     override fun bind(holder: Holder) {
         super.bind(holder)
-        holder.rootView.setOnClickListener(itemClickListener)
+        holder.rootView.onClick(itemClickListener)
         holder.rootView.setOnLongClickListener {
             it.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS)
             itemLongClickListener?.onLongClick(it) ?: false
@@ -95,7 +97,7 @@ abstract class RoomSummaryItem : VectorEpoxyModel<RoomSummaryItem.Holder>() {
     private fun renderSelection(holder: Holder, isSelected: Boolean) {
         if (isSelected) {
             holder.avatarCheckedImageView.visibility = View.VISIBLE
-            val backgroundColor = ColorProvider(holder.view.context).getColor(R.color.riotx_accent)
+            val backgroundColor = ThemeUtils.getColor(holder.view.context, R.attr.colorPrimary)
             val backgroundDrawable = TextDrawable.builder().buildRound("", backgroundColor)
             holder.avatarImageView.setImageDrawable(backgroundDrawable)
         } else {

@@ -23,7 +23,6 @@ import android.content.res.Resources
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.util.TypedValue
-import android.view.Menu
 import androidx.annotation.AttrRes
 import androidx.annotation.ColorInt
 import androidx.core.content.ContextCompat
@@ -247,16 +246,16 @@ object ThemeUtils {
         val aTheme = if (useDarkTheme(context)) aDarkTheme else aLightTheme
         context.setTheme(
                 when (aTheme) {
-                    //SYSTEM_THEME_VALUE -> if (isSystemDarkTheme(context.resources)) R.style.AppTheme_Dark else R.style.AppTheme_Light
-                    THEME_LIGHT_VALUE  -> R.style.AppTheme_Light
-                    THEME_DARK_VALUE   -> R.style.AppTheme_Dark
-                    THEME_BLACK_VALUE  -> R.style.AppTheme_Black
+                    //SYSTEM_THEME_VALUE -> if (isSystemDarkTheme(context.resources)) R.style.Theme_Vector_Dark else R.style.Theme_Vector_Light
+                    THEME_LIGHT_VALUE  -> R.style.Theme_Vector_Light
+                    THEME_DARK_VALUE   -> R.style.Theme_Vector_Dark
+                    THEME_BLACK_VALUE  -> R.style.Theme_Vector_Black
                     THEME_SC_LIGHT_VALUE -> R.style.AppTheme_SC_Light
                     THEME_SC_VALUE     -> R.style.AppTheme_SC
                     THEME_SC_DARK_VALUE -> R.style.AppTheme_SC_Dark
                     THEME_SC_COLORED_VALUE -> R.style.AppTheme_SC_Colored
                     THEME_SC_DARK_COLORED_VALUE -> R.style.AppTheme_SC_Dark_Colored
-                    else               -> R.style.AppTheme_Light
+                    else               -> R.style.AppTheme_SC_Light
                 }
         )
 
@@ -309,10 +308,8 @@ object ThemeUtils {
                 color.data
             } catch (e: Exception) {
                 when (colorAttribute) {
-                    android.R.attr.colorAccent           -> ContextCompat.getColor(c, R.color.riotx_accent)
-                    R.attr.colorAccent                   -> ContextCompat.getColor(c, R.color.riotx_accent)
-                    R.attr.riotx_positive_accent         -> ContextCompat.getColor(c, R.color.riotx_positive_accent)
-                    R.attr.riotx_positive_accent_alpha12 -> ContextCompat.getColor(c, R.color.riotx_positive_accent_alpha12)
+                    android.R.attr.colorAccent           -> ContextCompat.getColor(c, R.color.accent_sc)
+                    R.attr.colorAccent                   -> ContextCompat.getColor(c, R.color.accent_sc)
                     else                                 -> {
                         Timber.e(e, "Unable to get color")
                         ContextCompat.getColor(c, android.R.color.holo_red_dark)
@@ -331,25 +328,6 @@ object ThemeUtils {
             Timber.e(e, "Unable to get color")
         }
         return null
-    }
-
-    /**
-     * Update the menu icons colors
-     *
-     * @param menu  the menu
-     * @param color the color
-     */
-    fun tintMenuIcons(menu: Menu, color: Int) {
-        for (i in 0 until menu.size()) {
-            val item = menu.getItem(i)
-            val drawable = item.icon
-            if (drawable != null) {
-                val wrapped = DrawableCompat.wrap(drawable)
-                drawable.mutate()
-                DrawableCompat.setTint(wrapped, color)
-                item.icon = drawable
-            }
-        }
     }
 
     /**

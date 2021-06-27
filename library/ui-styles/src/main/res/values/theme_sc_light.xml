@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- SC THEME COLORS -->
+    <style name="AppTheme.Base.SC.Light" parent="Base.Theme.Vector.Light">
+        <item name="colorPrimary">@color/accent_sc</item>
+        <item name="colorPrimaryVariant">@color/accent_sc</item>
+        <item name="colorSecondary">@color/accent_sc</item>
+        <item name="colorSecondaryVariant">@color/accent_sc</item>
+
+        <!-- Keep color accent for legacy widget-->
+        <item name="colorAccent">@color/accent_sc</item>
+
+        <item name="materialAlertDialogTheme">@style/VectorAlertDialogStyleLight.SC</item>
+
+        <item name="vctr_encrypting_message_text_color">@color/accent_sc</item>
+
+        <!-- custom action bar -->
+        <item name="android:actionBarStyle">@style/Vector.Styled.ActionBar.SC</item>
+        <item name="actionBarStyle">@style/Vector.Styled.ActionBar.SC</item>
+
+        <!-- SC additions -->
+        <item name="sc_message_bg_incoming">#FFEEEEEE</item>
+        <item name="sc_message_bg_outgoing">@color/accent_sc_alpha12</item>
+        <item name="riotx_unread_unimportant_room_badge">?vctr_content_tertiary</item>
+        <item name="colorAccentPale">@color/accent_sc_pale</item>
+
+        <item name="bottomSheetDialogTheme">@style/Vector.BottomSheet.SC.Light</item>
+
+        <item name="vctr_unread_room_badge">?colorAccent</item>
+
+        <!-- Use dark color, to have enough contrast with icons color. windowLightStatusBar is only available in API 23+ -->
+        <item name="android:statusBarColor">@color/background_black_sc</item>
+        <!-- Use dark color, to have enough contrast with icons color. windowLightNavigationBar is only available in API 27+ -->
+        <item name="android:navigationBarColor">@color/background_black_sc</item>
+
+        <!-- enable window content transitions -->
+        <item name="android:windowContentTransitions">true</item>
+
+        <!-- specify shared element enter and exit transitions -->
+        <item name="android:windowSharedElementEnterTransition">@transition/image_preview_transition</item>
+        <item name="android:windowSharedElementExitTransition">@transition/image_preview_transition</item>
+
+        <item name="vctr_reaction_background_off">@color/vctr_reaction_background_off_light</item>
+        <item name="vctr_reaction_background_on">@color/sc_reaction_background_on_light</item>
+
+        <!-- Some alias -->
+        <item name="vctr_list_separator">@color/list_divider_color_sc_light</item>
+        <item name="vctr_list_separator_system">?vctr_list_separator</item>
+        <item name="vctr_list_separator_on_surface">?vctr_list_separator</item>
+    </style>
+
+    <!-- Default AppTheme for usage where settings don't apply -->
+    <style name="AppTheme.SC.Light" parent="AppTheme.Base.SC.Light" />
+
+</resources>

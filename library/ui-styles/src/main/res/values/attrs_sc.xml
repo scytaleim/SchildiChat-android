@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="VectorStylesSC">
+
+        <attr name="sc_message_bg_incoming" format="color" />
+        <attr name="sc_message_bg_outgoing" format="color" />
+
+        <attr name="colorAccentPale" format="color" />
+
+        <attr name="riotx_unread_unimportant_room_badge" format="color" />
+
+        <attr name="timestamp_overlay_fg" format="color" />
+        <attr name="timestamp_overlay_bg" format="color" />
+
+        <attr name="dense_dropdown_text_input" format="reference" />
+
+    </declare-styleable>
+
+</resources>
