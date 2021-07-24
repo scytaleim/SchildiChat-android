@@ -48,7 +48,7 @@
     <string name="settings_unimportant_counter_badge_summary">Include chats without notifications in the category unread counter</string>
 
     <string name="labs_mark_rooms_unread">Mark chats as unread</string>
-    <string name="labs_mark_rooms_unread_summary">Allow to mark chats as unread. Other matrix clients might not support this functionality yet.</string>
+    <string name="labs_mark_rooms_unread_summary">Allow marking chats as unread. Other Matrix clients might not support this yet.</string>
     <string name="url_previews_in_encrypted_rooms">URL previews in encrypted chats</string>
     <string name="url_previews_in_encrypted_rooms_summary">This will leak URLs from your messages to your homeserver!</string>
 
@@ -60,7 +60,7 @@
     <!-- Login screen -->
     <string name="login_connect_using_matrix_id_text_sc">e.g. @user:domain.com</string>
     <string name="login_server_other_title_sc">Custom server</string>
-    <string name="login_server_other_text_sc">Enter server address to login or register</string>
+    <string name="login_server_other_text_sc">Enter server address to log in or register</string>
 
     <string name="show_room_info_sc">Room details</string>
     <string name="show_participants_sc">Participants</string>
@@ -79,5 +79,29 @@
 
     <string name="settings_advanced_theme_settings">Advanced theme settings</string>
     <string name="settings_user_colors">User colors</string>
+    <string name="settings_theme_colors">Theme colors</string>
+    <string name="setting_sc_accent_color_light">Accent color for light themes</string>
+    <string name="setting_sc_accent_color_dark">Accent color for dark themes</string>
+    <string name="settings_sc_accent_disclaimer">Note that these color settings only apply to SC themes, and not Element themes.</string>
+
+    <!-- Accent colors -->
+    <string name="sc_accent_green">Green</string>
+    <string name="sc_accent_amber">Amber</string>
+    <string name="sc_accent_bluelight">Light blue</string>
+    <string name="sc_accent_cyan">Cyan</string>
+    <string name="sc_accent_gold">Gold</string>
+    <string name="sc_accent_lime">Lime</string>
+    <string name="sc_accent_orange">Orange</string>
+    <string name="sc_accent_pink">Pink</string>
+    <string name="sc_accent_purple">Purple</string>
+    <string name="sc_accent_red">Red</string>
+    <string name="sc_accent_teal">Teal</string>
+    <string name="sc_accent_turquoise">Turquoise</string>
+    <string name="sc_accent_yellow">Yellow</string>
+    <string name="sc_accent_carnation">Carnation</string>
+    <string name="sc_accent_denim">Denim</string>
+    <string name="sc_accent_indigo">Indigo</string>
+    <string name="sc_accent_lava">Lava</string>
+    <!-- do not change this comment for accent generation -->
 
 </resources>
