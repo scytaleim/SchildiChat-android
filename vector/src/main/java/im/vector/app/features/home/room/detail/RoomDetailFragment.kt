@@ -796,6 +796,7 @@ class RoomDetailFragment @Inject constructor(
                 scrollOnNewMessageCallback.forceScrollOnNextUpdate()
                 roomDetailViewModel.timeline.restartWithEventId(null)
             } else {
+                roomDetailViewModel.timeline.setInitialEventId(null)
                 layoutManager.scrollToPosition(0)
             }
         }
@@ -1177,7 +1178,7 @@ class RoomDetailFragment @Inject constructor(
             }
         }
         val stateRestorer = LayoutManagerStateRestorer(layoutManager).register()
-        scrollOnNewMessageCallback = ScrollOnNewMessageCallback(layoutManager, timelineEventController)
+        scrollOnNewMessageCallback = ScrollOnNewMessageCallback(layoutManager, timelineEventController, views.timelineRecyclerView)
         // Force scroll until the user has scrolled to address the bug where the list would jump during initial loading
         scrollOnNewMessageCallback.initialForceScroll = true
         scrollOnHighlightedEventCallback = ScrollOnHighlightedEventCallback(views.timelineRecyclerView, layoutManager, timelineEventController)
