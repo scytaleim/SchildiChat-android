@@ -133,6 +133,7 @@
         <item name="user_color_pl_51">@color/user_color_element_pl_51</item>
         <item name="user_color_pl_95">@color/user_color_element_pl_95</item>
         <item name="user_color_pl_100">@color/user_color_element_pl_100</item>
+        <item name="voice_message_playback_background_color">?vctr_content_quinary</item>
 
         <!-- Use dark color, to have enough contrast with icons color. windowLightStatusBar is only available in API 23+ -->
         <item name="android:statusBarColor">@color/android_status_bar_background_dark</item>
@@ -155,6 +156,8 @@
 
         <item name="vctr_jump_to_unread_style">@style/Widget.Vector.JumpToUnread.Light</item>
 
+        <!-- Voice Message -->
+        <item name="vctr_voice_message_toast_background">@color/vctr_voice_message_toast_background_light</item>
     </style>
 
     <style name="Theme.Vector.Light" parent="Base.Theme.Vector.Light" />
