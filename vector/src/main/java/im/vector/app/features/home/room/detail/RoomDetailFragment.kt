@@ -797,7 +797,7 @@ class RoomDetailFragment @Inject constructor(
                 roomDetailViewModel.timeline.restartWithEventId(null)
             } else {
                 roomDetailViewModel.timeline.setInitialEventId(null)
-                layoutManager.scrollToPosition(0)
+                layoutManager.scrollToPositionWithOffset(0, 0)
             }
         }
 
@@ -835,7 +835,10 @@ class RoomDetailFragment @Inject constructor(
             scrollOnHighlightedEventCallback.scheduleScrollTo(action.eventId)
         } else {
             views.timelineRecyclerView.stopScroll()
-            layoutManager.scrollToPosition(scrollPosition)
+            // Scroll such that the scrolled-to event is moved down 1/3 of the screen.
+            // To do that, we actually scroll the view above out by 2/3 (since we can only control the distance
+            // from the bottom of the view, not the top).
+            layoutManager.scrollToPositionWithOffset(scrollPosition + 1, views.timelineRecyclerView.measuredHeight * 2 / 3)
         }
     }
 
