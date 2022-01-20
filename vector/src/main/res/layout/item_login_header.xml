@@ -7,5 +7,5 @@
     android:layout_gravity="center_horizontal"
     android:layout_marginTop="32dp"
     android:importantForAccessibility="no"
-    android:src="@drawable/element_logo_sc"
+    android:src="@mipmap/ic_launcher_scytaleim"
     tools:viewBindingIgnore="true" />
