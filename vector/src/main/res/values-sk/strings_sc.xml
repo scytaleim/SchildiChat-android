@@ -26,7 +26,7 @@
     <string name="show_participants_sc">Účastníci</string>
     <string name="show_room_info_sc">Podrobný popis izby</string>
     <string name="all_list_rooms_empty_body">Chaty sa zobrazia tu</string>
-    <string name="all_list_rooms_empty_title">SchildiChat</string>
+    <string name="all_list_rooms_empty_title">scytaleim</string>
     <string name="bottom_action_all">Prehľad</string>
     <string name="prompt_simplified_mode_on">Jednoduché</string>
     <string name="prompt_simplified_mode_off">Kompletné</string>

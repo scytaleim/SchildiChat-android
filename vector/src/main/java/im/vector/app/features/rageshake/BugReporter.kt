@@ -258,7 +258,7 @@ class BugReporter @Inject constructor(
                     // build the multi part request
                     val builder = BugReporterMultipartBody.Builder()
                             .addFormDataPart("text", text)
-                            .addFormDataPart("app", "schildichat-android")
+                            .addFormDataPart("app", "scytaleim-android")
                             .addFormDataPart("user_agent", Matrix.getInstance(context).getUserAgent())
                             .addFormDataPart("user_id", userId)
                             .addFormDataPart("can_contact", canContact.toString())
@@ -346,7 +346,7 @@ class BugReporter @Inject constructor(
                     }
 
                     // Special for Element
-                    //builder.addFormDataPart("label", "[SchildiChat]")
+                    //builder.addFormDataPart("label", "[scytaleim]")
 
                     when (reportType) {
                         ReportType.BUG_REPORT -> {

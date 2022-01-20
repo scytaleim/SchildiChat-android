@@ -37,7 +37,7 @@
             android:layout_width="64dp"
             android:layout_height="64dp"
             android:importantForAccessibility="no"
-            android:src="@drawable/element_logo_sc"
+            android:src="@mipmap/ic_launcher_scytaleim"
             android:transitionName="loginLogoTransition" />
 
         <ImageView
